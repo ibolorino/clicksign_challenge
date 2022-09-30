@@ -9,17 +9,19 @@
 
 ### Starting up
 
+-   Rename `.env.local` file to `.env`
+
 -   On project folder use this command to build the docker containers:
 
-        $ docker compose -f local.yml build
+        $ docker compose build
 
 -   Run the initial migrate to database:
 
-        $ docker compose -f local.yml run --rm django python manage.py migrate
+        $ docker compose run --rm web python manage.py migrate
 
 -   Up the containers to access a local application on http://localhost:8000/:
 
-        $ docker compose -f local.yml up
+        $ docker compose up
 
 ### Setting Up Your Users
 
@@ -27,4 +29,4 @@
 
 -   To create a **superuser account**, use this command:
 
-        $ docker compose -f local.yml run --rm django python manage.py createsuperuser
+        $ docker compose run --rm web python manage.py createsuperuser
