@@ -1,6 +1,8 @@
 from django.core.exceptions import ValidationError
 from django.db import models
 
+from .utils import get_upload_path
+
 
 class Folder(models.Model):
     name = models.SlugField("Nome da Pasta", max_length=255)
@@ -30,3 +32,11 @@ class Folder(models.Model):
             self.level = parent_folder.level + 1
         if Folder.objects.filter(name=self.name, level=self.level).exists():
             raise ValidationError("Folder already exists")
+
+
+class File(models.Model):
+    file = models.FileField("Arquivo", upload_to=get_upload_path, max_length=255)
+    folder = models.ForeignKey("Folder", verbose_name="Pasta", on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.file}"

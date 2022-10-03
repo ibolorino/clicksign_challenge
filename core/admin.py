@@ -1,10 +1,6 @@
 from django.contrib import admin
 
-from .models import Folder
+from .models import File, Folder
 
-
-class FolderAdmin(admin.ModelAdmin):
-    exclude = ("level",)
-
-
+admin.site.register(File)
 admin.site.register(Folder)
